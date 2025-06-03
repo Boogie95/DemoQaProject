@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "b73c4213-4a64-4739-9b66-49234d26731a",
+		"name": "DemoQA API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45125289",
+		"_collection_link": "https://bundalojovan.postman.co/workspace/Bundalo-Jovan's-Workspace~2a44a9e0-620c-40d6-8d95-0f3999300992/collection/45125289-b73c4213-4a64-4739-9b66-49234d26731a?action=share&source=collection_link&creator=45125289"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "generateToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Check if the token is generated\r",
+									"pm.test(\"Token is generated\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody.token).to.exist;\r",
+									"    pm.expect(responseBody.token).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"BoogieWoogie\",\r\n    \"password\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demoqa.com/Account/v1/GenerateToken",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"GenerateToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check if the login is successful by verifying the status code and the presence of the token in the response\r",
+									"\r",
+									"// Verify the status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Verify the presence of the token in the response\r",
+									"pm.test(\"Token is present in the response\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody.token).to.exist;\r",
+									"});\r",
+									"\r",
+									"const responseBody = pm.response.json();\r",
+									"pm.environment.set(\"token\", responseBody.token);\r",
+									"pm.environment.set(\"userId\", responseBody.userId);\r",
+									"\r",
+									"console.log(\"Token set: \" + pm.environment.get(\"token\"));\r",
+									"console.log(\"ID SET: \"+ pm.environment.get(\"userId\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"BoogieWoogie\",\r\n    \"password\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demoqa.com/Account/v1/Login",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Store",
+			"item": [
+				{
+					"name": "all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/BookStore/v1/Books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code je 200\",function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Da li je naziv knjige You Don't Know JS za uneti isbn\",function(){\r",
+									"    let podaci=pm.response.json();\r",
+									"    pm.expect(podaci.title).to.eql(\"You Don't Know JS\");\r",
+									"}\r",
+									")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/BookStore/v1/Book?ISBN=9781491904244",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Book"
+							],
+							"query": [
+								{
+									"key": "ISBN",
+									"value": "9781491904244"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBookToUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"{{userId}}\",\r\n  \"collectionOfIsbns\": [\r\n    {\r\n      \"isbn\": \"9781449337711\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demoqa.com/BookStore/v1/Books",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Book deleted\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isbn\": \"9781449337711\",\r\n    \"userId\": \"{{userId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://demoqa.com/BookStore/v1/Book",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User'sBooks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Book is in the user's collection\", function(){\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"bookIsInCollection\", jsonData.books.length > 0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://demoqa.com/Account/v1/User/{{userId}}",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace(UPDATE)Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"{{userId}}\",\r\n    \"isbn\": \"9781449331818\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/BookStore/v1/Books/9781449325862",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"BookStore",
+								"v1",
+								"Books",
+								"9781449325862"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User Managment",
+			"item": [
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"BoogieWoogie\",\r\n  \"password\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/Account/v1/User",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://demoqa.com/Account/v1/User/{{userId}}",
+							"protocol": "https",
+							"host": [
+								"demoqa",
+								"com"
+							],
+							"path": [
+								"Account",
+								"v1",
+								"User",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bookIsInCollection",
+			"value": ""
+		}
+	]
+}
