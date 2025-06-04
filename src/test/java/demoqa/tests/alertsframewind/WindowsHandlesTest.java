@@ -6,7 +6,7 @@ import demoqa.base.BaseTest;
 
 public class WindowsHandlesTest extends BaseTest {
     @Test
-    public void NewWindowTest() throws InterruptedException {
+    public void NewWindowTest(){
         var wind=homePage.goToAlertsFrameWindows().clickOnWindowsMenu();
         wind.clickWindowButton();
         wind.switchToNewWindow();

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Widgets Suite">
+    <test name="Date Picker Test">
+        <classes>
+            <class name="demoqa.tests.widgets.DatePickerTest"/></classes>
+    </test>
+    <test name="DropDown Test">
+        <classes>
+            <class name="demoqa.tests.widgets.SelectDropDownTest"/></classes>
+    </test>
+    <test name="Slider Test">
+        <classes>
+            <class name="demoqa.tests.widgets.SliderPageTest"/></classes>
+    </test>
+</suite>

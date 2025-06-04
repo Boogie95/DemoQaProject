@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+    <suite-files>
+        <suite-file path="AlertsFrameWindowsSuite.xml"/>
+        <suite-file path="BookStoreAppSuite.xml"/>
+        <suite-file path="ElementsSuite.xml"/>
+        <suite-file path="FormSuite.xml"/>
+        <suite-file path="WidgetsSuite.xml"/>
+    </suite-files>
+</suite>

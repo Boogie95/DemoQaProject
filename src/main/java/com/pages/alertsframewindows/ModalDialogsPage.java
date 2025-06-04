@@ -17,9 +17,11 @@ public class ModalDialogsPage extends AlertsFrameWindowsPage{
     public void clickSmallModalButton(){
         waitForElementToBeClickable(smallModalButton);
         click(smallModalButton);
+        waitForElementToBeVisible(smallModalButton);
     }
 
     public String getSmallModalText(){
+        waitForElementToBeVisible(smallModalButton);
         return find(smallModaText).getText();
     }
 
