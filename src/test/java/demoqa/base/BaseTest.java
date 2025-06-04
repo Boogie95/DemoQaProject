@@ -5,17 +5,13 @@ import com.base.BasePage;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import utilities.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +39,8 @@ public class BaseTest
     public void loadApplication()   {
         // Inicijalizujte NOVI pregledač za SVAKI test
         EdgeOptions options = new EdgeOptions();
-        options.addArguments("--start-maximized");
+        options.addArguments("--start-maximized")
+                .addArguments("--headless"); //I PREFER THIS FOR REGGRESIONSUITE
         driver = new EdgeDriver(options);
         // Navigirajte na početnu URL i inicijalizujte Page Objects
         driver.get(url);

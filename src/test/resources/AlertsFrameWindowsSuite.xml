@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Alerts-Frame-Windows Suite">
+    <test name="AlertsTests">
+        <classes>
+            <class name="demoqa.tests.alertsframewind.AlertsTest"/>
+        </classes>
+    </test>
+    <test name="FrameTests">
+        <classes>
+            <class name="demoqa.tests.alertsframewind.FramesTest"/>
+        </classes>
+    </test>
+    <test name="WindowTest">
+        <classes>
+            <class name="demoqa.tests.alertsframewind.WindowsHandlesTest"/>
+        </classes>
+    </test>
+    <test name="ModalTest">
+        <classes>
+            <class name="demoqa.tests.alertsframewind.ModalTest"/>
+        </classes>
+    </test>
+</suite>

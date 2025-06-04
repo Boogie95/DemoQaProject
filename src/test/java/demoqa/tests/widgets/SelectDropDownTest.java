@@ -10,7 +10,7 @@ import java.util.List;
 public class SelectDropDownTest extends BaseTest {
 
     @Test
-    public void testMultiSelectDropDown() throws InterruptedException {
+    public void testMultiSelectDropDown(){
 
         homePage.goToWidgets().clickOnSelectMenu();
         SelectMenuPage selectMenuPage=new SelectMenuPage(driver);

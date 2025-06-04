@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Elements Suite">
+    <test name="WebTablesTests">
+        <classes>
+            <class name="demoqa.tests.elements.TablesTest"/>
+        </classes>
+    </test>
+    <test name="LinksTests">
+        <classes><class name="demoqa.tests.elements.LinksTest"/></classes>
+    </test>
+    <test name="TextBoxTest">
+        <classes><class name="demoqa.tests.elements.KeyboardTest"/></classes>
+    </test>
+    <test name="WaitsTests">
+        <classes>
+            <class name="demoqa.tests.elements.DynamicWaitTest"/></classes>
+    </test>
+</suite>
